@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#130f15">
+  <title>After Hours — a bar for things on your mind</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="bar-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="After Hours home"><span class="brand-mark">◯</span><span>AFTER HOURS</span></a>
+      <p id="connection" class="connection" role="status">Opening the door…</p>
+    </header>
+
+    <section class="welcome-row" aria-labelledby="hero-title">
+      <div><p class="eyebrow">A SHARED BAR</p><h1 id="hero-title">A thought, a drink.</h1><p>Leave it on the counter.</p></div>
+      <svg class="bartender-icon" viewBox="0 0 150 110" aria-hidden="true">
+        <circle cx="43" cy="20" r="10"/><path d="M43 30v37m0-27-19 13m19-13 19 13m-19 14-15 26m15-26 15 26"/>
+        <path d="M62 53h22m-14 0 6 26m8-26-6 26m-12 0h20"/><path d="M69 47h16l-3 6H72z"/>
+      </svg>
+    </section>
+
+    <section class="order-card" aria-labelledby="order-title">
+      <div class="order-heading"><p class="eyebrow">YOUR TAB</p><h2 id="order-title">Tonight.</h2></div>
+      <form id="order-form">
+        <label for="name">Name</label>
+        <input id="name" maxlength="48" autocomplete="nickname" placeholder="e.g. Maya" required>
+        <label for="thought">On your mind</label>
+        <textarea id="thought" maxlength="280" rows="3" placeholder="It doesn't have to make sense." required></textarea>
+        <div class="form-bottom"><p id="form-note">The bartender makes it into a drink.</p><button id="order-button" type="submit"><span>Order a drink</span><span aria-hidden="true">→</span></button></div>
+      </form>
+    </section>
+
+    <section class="counter-section" aria-labelledby="counter-title">
+      <div class="counter-heading"><div><p class="eyebrow">THE PUBLIC COUNTER</p><h2 id="counter-title">Tonight’s orders <span id="drink-count">0</span></h2></div><p class="counter-copy">Pick up a glass to hear the story behind it.</p></div>
+      <div id="empty-state" class="empty-state"><span>✦</span><p>The counter is waiting for the first drink.</p></div>
+      <div id="counter" class="counter" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <dialog id="drink-dialog" aria-labelledby="dialog-name">
+    <button id="close-dialog" class="close-dialog" aria-label="Close drink details">×</button>
+    <div id="dialog-image" class="dialog-image"></div>
+    <div class="dialog-copy"><p id="dialog-owner" class="eyebrow"></p><h2 id="dialog-name"></h2><p id="dialog-mood" class="mood"></p><blockquote id="dialog-thought"></blockquote><dl id="drink-details"></dl></div>
+  </dialog>
+
+  <template id="drink-template"><article class="drink-card"><button class="drink-button"><div class="stick-person" aria-hidden="true"><i></i><b></b><span></span></div><div class="drink-image"><img alt=""></div><div class="drink-label"><p class="drink-owner"></p><h3 class="drink-name"></h3><span class="drink-mood"></span></div></button></article></template>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

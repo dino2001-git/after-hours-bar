@@ -1,0 +1,25 @@
+{
+  "rules": {
+    "fakeBar": {
+      "drinks": {
+        ".read": "auth != null",
+        ".indexOn": ["timestamp"],
+        "$drinkId": {
+          ".write": "auth != null && !data.exists() && newData.exists() && newData.child('uid').val() == auth.uid",
+          ".validate": "newData.hasChildren(['owner','thought','cocktail','imageUrl','timestamp','uid'])",
+          "owner": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 48" },
+          "thought": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 280" },
+          "imageUrl": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 2048" },
+          "uid": { ".validate": "newData.val() == auth.uid" },
+          "timestamp": { ".validate": "newData.isNumber() && newData.val() == now" },
+          "cocktail": {
+            ".validate": "newData.hasChildren(['name','base','taste','color','glass','garnish','mood','hex'])",
+            "$other": { ".validate": "$other == 'name' || $other == 'base' || $other == 'taste' || $other == 'color' || $other == 'glass' || $other == 'garnish' || $other == 'mood' || $other == 'hex'" }
+          },
+          "reactions": { ".validate": "newData.isNumber() && newData.val() == 0" },
+          "$other": { ".validate": "$other == 'owner' || $other == 'thought' || $other == 'cocktail' || $other == 'imageUrl' || $other == 'timestamp' || $other == 'uid' || $other == 'reactions'" }
+        }
+      }
+    }
+  }
+}
